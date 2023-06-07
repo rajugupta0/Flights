@@ -6,7 +6,6 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
 
 async function createAirplane(req,res) {
     try {
-        console.log("inside controller");
         const airplane = await AirplaneService.createAirplane({
             modelNumber: req.body.modelNumber,
             capacity: req.body.capacity
@@ -14,12 +13,13 @@ async function createAirplane(req,res) {
         SuccessResponse.data = airplane;
         return res
                 .status(StatusCodes.CREATED)
-                    .json(SuccessResponse);
+                .json(SuccessResponse);
                   
     } catch (error) {
         ErrorResponse.error = error;
         return res
-                .status(StatusCodes.INTERNAL_SERVER_ERROR)
+                // .status(error.statusCodes)
+                .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse);
     }
 }
