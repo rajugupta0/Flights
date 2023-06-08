@@ -17,9 +17,12 @@ class CrudRepository {
     async destroy(data){
         const response = await this.model.destroy({
             where: {
-            id: data
+               id: data
+            }
+        });
+        if(!response) {
+            throw new AppError('Not able to find Data',StatusCodes.NOT);
         }
-           });
         return response;
     
     }
@@ -27,7 +30,7 @@ class CrudRepository {
    async get(data) {
     const response = await this.model.findByPk(data);
     if(!response) {
-        throw new AppError('Not able to find Data',StatusCodes.NOT_FOUND);
+        throw new AppError('Not able to find Data',StatusCodes.NOT);
     }
     return response;
    }
