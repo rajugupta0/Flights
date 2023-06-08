@@ -2,8 +2,6 @@ const { StatusCodes } = require('http-status-codes');
 
 const { AirplaneService } = require('../services');
 const { SuccessResponse, ErrorResponse } = require('../utils/common'); 
-// const { getAirplanes } = require('../services/airplane-service');
-// const { response } = require('express');
 
 /* POST : /airplanes
 req-body {modelNumber: 'airbus320',capacity: 200}
@@ -22,12 +20,13 @@ async function createAirplane(req,res) {
     } catch (error) {
         ErrorResponse.error = error;
         return res
-                // .status(error.statusCodes)
-                .status(StatusCodes.BAD_REQUEST)
+                .status(error.statusCode)
                 .json(ErrorResponse);
     }
 }
-
+/* GET : /airplanes
+req-body {}
+*/
 async function getAirplanes(req, res) {
     try{
         const airplanes = await AirplaneService.getAirplanes();
@@ -39,14 +38,31 @@ async function getAirplanes(req, res) {
     }catch(error) {
         ErrorResponse.error = error;
         return res
-                // .status(error.statusCodes)
-                .status(StatusCodes.BAD_REQUEST)
+                .status(error.statusCode)
                 .json(ErrorResponse);
     }
     
 }
+/* GET : /airplanes/:id
+req-body {}
+*/
+async function getAirplane(req, res) {
+    try {
+        const airplanes = await AirplaneService.getAirplane(req.params.id);
+        SuccessResponse.data = airplanes;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch(error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
 
 module.exports = {
     createAirplane,
-    getAirplanes
+    getAirplanes,
+    getAirplane
 }
