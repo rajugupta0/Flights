@@ -89,10 +89,10 @@ req-body {}
 */
 async function updateAirplane(req, res) {
     try{
-        const airplanes = await AirplaneService.updateAirplane(req.params.id, {
+        const airplane = await AirplaneService.updateAirplane(req.params.id, {
             capacity:req.body.capacity
         });
-        SuccessResponse.data = airplanes;
+        SuccessResponse.data = airplane;
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
