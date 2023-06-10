@@ -67,10 +67,7 @@ req-body {}
 */
 async function destroyAirplane(req, res) {
     try{
-        const airplane = await AirplaneService.updateAirplane({
-            modelNumber: req.body.modelNumber,
-            capacity: req.body.capacity
-        });
+        const airplanes = await AirplaneService.destroyAirplane(req.params.id);
         SuccessResponse.data = airplanes;
         return res
                 .status(StatusCodes.OK)
@@ -82,17 +79,17 @@ async function destroyAirplane(req, res) {
                 .status(error.statusCode)
                 .json(ErrorResponse);
     }
-    
+
 }
 /* PATCH : /airplanes/:id,data
 req-body {}
 */
 async function updateAirplane(req, res) {
     try{
-        const airplane = await AirplaneService.updateAirplane(req.params.id, {
+        const airplanes = await AirplaneService.updateAirplane(req.params.id, {
             capacity:req.body.capacity
         });
-        SuccessResponse.data = airplane;
+        SuccessResponse.data = airplanes;
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
