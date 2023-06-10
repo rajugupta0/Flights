@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const { Logger } = require('../config');
 const AppError = require('../utils/errors/app-error');
+const { response } = require('express');
 
 class CrudRepository {
     constructor(model) {
@@ -40,17 +41,15 @@ class CrudRepository {
             return response;
     }
 
-    async update(id,data){
-     
-            response = await this.model.update(data, {
-                where: {
-                    id: id
-                }
-            })
-            return response;
-        }
-
-
+   
+    async update(id, data) {
+        const response = await this.model.update(data, {
+            where: {
+                id: id
+            }
+        })
+        return response;
+    }
 
 }
 
