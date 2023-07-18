@@ -49,14 +49,14 @@ function validateCreateRequest(req, res, next) {
     }
     if(!req.body.price) {
         ErrorResponse.messsage = 'Something went wrong while creating flight. Please try again';
-        ErrorResponse.error = new AppError([ 'price not found in incoming request in the correct form', StatusCodes.BAD_REQUEST ]);
+        ErrorResponse.error = new AppError([ 'Price not found in incoming request in the correct form', StatusCodes.BAD_REQUEST ]);
         return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse);
     }
     if(!req.body.totalSeats) {
         ErrorResponse.messsage = 'Something went wrong while creating flight. Please try again';
-        ErrorResponse.error = new AppError([ 'totalSeats not found in incoming request in the correct form', StatusCodes.BAD_REQUEST ]);
+        ErrorResponse.error = new AppError([ 'total Seats not found in incoming request in the correct form', StatusCodes.BAD_REQUEST ]);
         return res
                 .status(StatusCodes.BAD_REQUEST)
                 .json(ErrorResponse);
